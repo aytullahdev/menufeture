@@ -8,8 +8,12 @@ const Card = ({data}) => {
             </div>
             <div className='p-5'>
                 <h2 className='text-xl py-2'>{data.name}</h2>
-                <p>{data.desc}</p>
-                <p className='text-xl py-2'>From <span className='font-bold text-green-500'>${data.price}</span></p>
+                <div>
+                    <p>Quantity: <span className='bg-orange-500 text-white p-1 rounded-full text-sm'>{data.quan==='0'?"OUT OF STOCK":data.quan}</span></p>
+                    
+                </div>
+                <p className='text-xl py-2'>Start From <span className='font-bold text-green-500'>${data.price}</span></p>
+              
                 <Link to={`/products/details/${data._id}`} ><button className='py-2 px-10 text-white rounded mx-auto block  bg-green-500 hover:bg-green-600'>MORE INFO</button></Link>
             </div>
         </div>
