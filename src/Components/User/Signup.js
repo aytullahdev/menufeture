@@ -3,20 +3,23 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-      } = useForm();
-      const onSubmit = (data) => {
-        console.log(data);
-      };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    // Handel create user
+    console.log(data);
+  };
   return (
     <div className="flex justify-center text-black items-center min-h-screen">
-    <h1 className="text-black text-xl uppercase font-bold">Create a Account</h1>
-      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-        <form  onSubmit={handleSubmit(onSubmit)} class="card-body">
+      <div class="card py-2 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <h1 className="text-black text-xl uppercase font-bold">
+          Create a Account
+        </h1>
+        <form onSubmit={handleSubmit(onSubmit)} class="card-body">
           <div class="form-control">
             <label class="label">
               <span class="label-text">Email</span>
@@ -25,7 +28,11 @@ const Signup = () => {
               type="text"
               placeholder="email"
               class="input input-bordered"
+              {...register("email", { required: true })}
             />
+            <label className=" label text-sm text-red-500">
+              {errors.email && <span>This field is required</span>}
+            </label>
           </div>
           <div class="form-control">
             <label class="label">
@@ -35,15 +42,33 @@ const Signup = () => {
               type="text"
               placeholder="password"
               class="input input-bordered"
+              {...register("password", { required: true })}
             />
+            <label className=" label text-sm text-red-500">
+              {errors.password && <span>This field is required</span>}
+            </label>
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Confirm Password</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Confirm password"
+              class="input input-bordered"
+              {...register("cpassword", { required: true })}
+            />
+            <label className=" label text-sm text-red-500">
+              {errors.cpassword && <span>This field is required</span>}
+            </label>
+          </div>
+          <div class="form-control mt-6">
+            <button class="btn btn-primary">SIGN UP</button>
             <label class="label">
               <Link to="/login" class="label-text-alt link link-hover">
                 Alrady have an account?
               </Link>
             </label>
-          </div>
-          <div class="form-control mt-6">
-            <button class="btn btn-primary">SIGN UP</button>
           </div>
         </form>
       </div>

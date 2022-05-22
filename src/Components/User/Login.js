@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -11,6 +10,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    // Handle user Login
     console.log(data);
   };
   return (
@@ -56,6 +56,9 @@ const Login = () => {
           </div>
           <div class="form-control mt-6">
             <button class="btn btn-primary">Login</button>
+            <label className="label-text-alt link link-hover text-left py-2">
+              <Link to="/signup">Create a new account</Link>
+            </label>
           </div>
         </div>
       </form>

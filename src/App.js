@@ -7,6 +7,7 @@ import Dashboard from "./Components/Admin/Dashboard";
 import Addproduct from "./Components/Sections/Products/Addproduct";
 import Login from "./Components/User/Login";
 import Signup from "./Components/User/Signup";
+import Resepassword from "./Components/User/Resepassword";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
                 <Route path="addproduct" element={<Addproduct/>}/>
             </Route>
             <Route path="/login" element={<Login/>}/>
-            <Route path="/login" element={<Signup/>}/>
+            <Route path="/signup" element={<Signup/>}/>
+            <Route path="/resetpwd" element={<Resepassword/>}/>
           </Routes>
         </div>
         
