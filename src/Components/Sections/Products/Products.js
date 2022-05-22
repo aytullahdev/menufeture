@@ -5,7 +5,7 @@ const Products = () => {
   return (
     <div className="text-black text-left px-10 ">
       <h1 className="text-xl uppercase font-semibold">OUR PRODUCTS</h1>
-      <div className="grid grid-cols-3 gap-5 my-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 my-5">
         <Card />
         <Card />
         <Card />

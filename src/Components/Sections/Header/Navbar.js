@@ -2,7 +2,7 @@ import React from "react";
 import Navlink from "./Navlink";
 const Navbar = () => {
   return (
-    <div className="bg-green-400 sticky top-0 left-0 w-full lg:min-h-screen flex lg:flex-col py-10">
+    <div className="bg-green-400 hidden lg:sticky top-0 left-0 w-full lg:min-h-screen lg:flex lg:flex-col py-10">
      
        <Navlink to="/" text="Home"/>
        <Navlink text="Product"/>
