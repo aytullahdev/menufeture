@@ -3,10 +3,10 @@ import Card from "./Card";
 import { useState , useEffect} from "react";
 import axios from "axios";
 import { data } from "autoprefixer";
-const Products = () => {
+const Products = ({limit}) => {
    const [product, setProduct] = useState(null);
    useEffect(() => {
-      axios.get('http://localhost:5000/products')
+      axios.get(`http://localhost:5000/products?limit=${limit || 100 }`)
       .then(data=>{
          setProduct(data.data);
          

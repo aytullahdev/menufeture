@@ -8,6 +8,9 @@ import Addproduct from "./Components/Sections/Products/Addproduct";
 import Login from "./Components/User/Login";
 import Signup from "./Components/User/Signup";
 import Resepassword from "./Components/User/Resepassword";
+import Products from "./Components/Sections/Products/Products";
+import ProductDetail from "./Components/Sections/Products/ProductDetail";
+import Notfound from "./Components/Errorpage/Notfound";
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/resetpwd" element={<Resepassword/>}/>
+            <Route path="/products" element={<Products/>}/>
+            <Route path="products/details/:id" element={<ProductDetail/>}/>
+            <Route path="*" element={<Notfound/>}/>
           </Routes>
         </div>
         

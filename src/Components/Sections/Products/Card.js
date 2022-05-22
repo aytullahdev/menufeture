@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Card = ({data}) => {
     return (
         <div className='bg-white  rounded'>
@@ -10,7 +10,7 @@ const Card = ({data}) => {
                 <h2 className='text-xl py-2'>{data.name}</h2>
                 <p>{data.desc}</p>
                 <p className='text-xl py-2'>From <span className='font-bold text-green-500'>${data.price}</span></p>
-                <button className='py-2 px-10 text-white rounded mx-auto block bg-green-500 hover:bg-green-600'>MORE INFO</button>
+                <Link to={`/products/details/${data._id}`} ><button className='py-2 px-10 text-white rounded mx-auto block  bg-green-500 hover:bg-green-600'>MORE INFO</button></Link>
             </div>
         </div>
     );
