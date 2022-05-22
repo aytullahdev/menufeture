@@ -5,7 +5,10 @@ const Addproduct = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const onSubmit = data =>{
      axios.post('http://localhost:5000/addproduct',data)
-     .then(res=>console.log(res));
+     .then(res=>{
+        console.log(res);
+        reset();
+     });
   };
   return (
     
