@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 const Dashboard = () => {
   return (
     <div className="p-2">
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-4 gap-5">
         <Link
           to="/dashboard/addproduct"
           className="bg-green-500 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400"
@@ -17,6 +17,9 @@ const Dashboard = () => {
         <div className="bg-indigo-500 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400">
           Manage Users
         </div>
+        <Link to="/dashboard/products" className="bg-green-600 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400">
+          MANAGE PRODUCT
+        </Link>
       </div>
       <div className="py-10">
         <Outlet />

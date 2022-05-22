@@ -11,6 +11,7 @@ import Resepassword from "./Components/User/Resepassword";
 import Products from "./Components/Sections/Products/Products";
 import ProductDetail from "./Components/Sections/Products/ProductDetail";
 import Notfound from "./Components/Errorpage/Notfound";
+import Manageproducts from "./Components/Sections/Products/Manageproducts";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<Home/>} />
             <Route path="/dashboard" element={<Dashboard/>}>
                 <Route path="addproduct" element={<Addproduct/>}/>
+                <Route path="products" element={<Manageproducts/>}/>
             </Route>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
