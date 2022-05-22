@@ -23,15 +23,21 @@ const Signup = () => {
   const onSubmit = (data) => {
     // Handel create user
     if(data.password!==data.cpassword) return;
-    createUserWithEmailAndPassword(data.email,data.password);
-    if(user){
-        const userData = {email:data.email,name:'',education:'',location:'',phone:'',linkdin:''};
-        axios.post('http://localhost:5000/user',userData)
-        .then(res=>{
-           navigation('/login');
-        })
-    }
+    createUserWithEmailAndPassword(data.email,data.password)
+    
   };
+  if(!loading && !error && user){
+    if(user){
+      console.log(user);
+      const userData = {email:user.user.email,name:'',education:'',location:'',phone:'',linkdin:''};
+      console.log(userData);
+      axios.post('http://localhost:5000/user',userData)
+      .then(res=>{
+         signOut(Auth);
+         navigation('/login');
+      })
+  }
+  }
   return (
     <div className="flex justify-center text-black items-center min-h-screen">
       <div class="card py-2 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">

@@ -1,10 +1,13 @@
 import React from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Auth from "../Firebase.init";
+import { useEffect } from "react";
 const Login = () => {
-  
-
+  const navigation = useNavigate();
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(Auth);
   const {
     register,
     handleSubmit,
@@ -13,8 +16,15 @@ const Login = () => {
   } = useForm();
   const onSubmit = (data) => {
     // Handle user Login
-    console.log(data);
+    signInWithEmailAndPassword(data.email, data.password);
   };
+  useEffect(() => {
+    if (!loading && user) {
+      reset();
+      navigation("/profile");
+    }
+  }, [user]);
+
   return (
     <div className="flex justify-center text-black items-center min-h-screen">
       <form
@@ -49,6 +59,7 @@ const Login = () => {
             />
             <label className=" label text-sm text-red-500">
               {errors.password && <span>This field is required</span>}
+              {error?.message && <span>{error.message}</span>}
             </label>
             <label class="label">
               <Link to="/resetpwd" class="label-text-alt link link-hover">

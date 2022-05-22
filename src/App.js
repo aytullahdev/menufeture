@@ -12,6 +12,7 @@ import Products from "./Components/Sections/Products/Products";
 import ProductDetail from "./Components/Sections/Products/ProductDetail";
 import Notfound from "./Components/Errorpage/Notfound";
 import Manageproducts from "./Components/Sections/Products/Manageproducts";
+import Profile from "./Components/User/Profile";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/resetpwd" element={<Resepassword/>}/>
             <Route path="/products" element={<Products/>}/>
             <Route path="products/details/:id" element={<ProductDetail/>}/>
+            <Route path="/profile" element={<Profile/>}/>
             <Route path="*" element={<Notfound/>}/>
           </Routes>
         </div>
