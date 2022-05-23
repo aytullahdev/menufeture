@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Auth from "../Firebase.init";
 import { useEffect } from "react";
+import axios from "axios";
 const Login = () => {
   const navigation = useNavigate();
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -21,7 +22,15 @@ const Login = () => {
   useEffect(() => {
     if (!loading && user) {
       reset();
-      navigation("/profile");
+      const data = {email:user.user.email};
+      axios.post('http://localhost:5000/login',data)
+      .then((res)=>{
+        if(res.data?._id){
+          localStorage.setItem("userid",res.data._id);
+          navigation(`/profile`);
+        }
+      })
+     
     }
   }, [user]);
 
