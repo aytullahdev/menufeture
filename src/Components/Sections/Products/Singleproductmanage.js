@@ -25,7 +25,7 @@ const Singleproductmanage = ({ data }) => {
         <td>{data.quan || 12}</td>
         <th>
           <Link
-            to={`/inventory/${data._id}`}
+            to={`/dashboard/inventory/${data._id}`}
             className="btn btn-primary text-white btn-xs ml-2"
           >
             Details

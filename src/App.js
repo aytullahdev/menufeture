@@ -14,6 +14,7 @@ import Notfound from "./Components/Errorpage/Notfound";
 import Manageproducts from "./Components/Sections/Products/Manageproducts";
 import axios from "axios";
 import Profile from "./Components/User/Profile";
+import Editproduct from "./Components/Sections/Products/Editproduct";
 
 function App() {
   const navigation = useNavigate();
@@ -40,6 +41,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard/>}>
                 <Route path="addproduct" element={<Addproduct/>}/>
                 <Route path="products" element={<Manageproducts/>}/>
+                <Route path="inventory/:id" element={<Editproduct/>}/>
             </Route>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
