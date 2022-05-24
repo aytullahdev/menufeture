@@ -6,9 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Notfound from "./Components/Errorpage/Notfound";
-axios.interceptors.request.use(request=>{
-  return request;
-})
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

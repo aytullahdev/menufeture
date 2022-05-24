@@ -1,5 +1,7 @@
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Profile from "./Profile";
 
 const UpdateprofileModal = ({ userinfo }) => {
     const {
@@ -10,7 +12,14 @@ const UpdateprofileModal = ({ userinfo }) => {
       } = useForm();
       const onSubmit = (data) => {
         // Handle user Login
-        console.log(data);
+       const updateData = {...userinfo,...data};
+       axios.post('http://localhost:5000/updateprofile',updateData)
+       .then(res=>{
+           console.log(res.data);
+           reset();
+           //Do Next thing
+       })
+
        
       };
   return (
@@ -81,14 +90,26 @@ const UpdateprofileModal = ({ userinfo }) => {
                   </div>
                   <div class="form-control">
                     <label class="label">
+                      <span class="label-text">Education</span>
+                    </label>
+                    <input
+                    {...register("education")}
+                      type="text"
+                      placeholder="education"
+                      class="input input-bordered"
+                      defaultValue={userinfo.education}
+                    />
+                  </div>
+                  <div class="form-control">
+                    <label class="label">
                       <span class="label-text">Adress</span>
                     </label>
                     <textarea
-                    {...register("adress")}
+                    {...register("location")}
                       type="text"
-                      placeholder="Your adress"
+                      placeholder="location"
                       class="input input-bordered"
-                      defaultValue={userinfo.adress}
+                      defaultValue={userinfo.location}
                     />
                   </div>
                   <div class="form-control mt-6">

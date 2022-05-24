@@ -48,18 +48,18 @@ const Profile = () => {
             </h1>
             <div className="text-left py-5 px-2">
               <h3>
-                Name: <span className="text-xl px-5 ">{userinfo.name}</span>
+                Name: <span className="text-md px-5 ">{userinfo.name}</span>
               </h3>
               <h3>
-                Email:<span className="text-xl px-5 ">{userinfo.email}</span>
+                Email:<span className="text-md px-5 ">{userinfo.email}</span>
               </h3>
               <p>
                 Location:
-                <span className="text-xl px-5 ">{userinfo.location}</span>
+                <span className="text-md px-5 ">{userinfo.location}</span>
               </p>
               <p>
                 Linkdin:
-                <span className="text-xl px-5 ">{userinfo.linkdin}</span>
+                <span className="text-md px-5 "><a target="_blank" className=" link link-hover" href={userinfo.linkdin}>linkdin profile</a></span>
               </p>
               {user && !loading  && user.email === userinfo.email && (
                 <label
