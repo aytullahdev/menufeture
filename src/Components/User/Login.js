@@ -1,12 +1,14 @@
 import React from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Auth from "../Firebase.init";
 import { useEffect } from "react";
 import axios from "axios";
 const Login = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(Auth);
   const {
@@ -27,7 +29,10 @@ const Login = () => {
       .then((res)=>{
         if(res.data?._id){
           localStorage.setItem("userid",res.data._id);
-          navigation(`/profile`);
+          if(res.data.role==='admin'){
+            localStorage.setItem("adminid",res.data._id);
+          }
+          navigate(from, { replace: true });
         }
       })
      

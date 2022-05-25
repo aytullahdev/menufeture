@@ -19,9 +19,10 @@ const Editproduct = () => {
      })
   }, [id])
   const onSubmit = (data) => {
-    axios.post("http://localhost:5000/addproduct", data).then((res) => {
+    const sendData ={...data,_id:id};
+    axios.post("http://localhost:5000/addproduct", sendData).then((res) => {
       console.log(res);
-      reset();
+     
     });
   };
   return (

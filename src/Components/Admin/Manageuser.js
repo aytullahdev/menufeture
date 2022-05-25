@@ -1,21 +1,20 @@
-import React from "react";
-import Singleproductmanage from "./Singleproductmanage";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import React from "react";
 import { useQuery } from "react-query";
-const Manageproducts = () => {
-  const [products, setProducts] = useState([]);
-  const { isLoading, error, data, refetch } = useQuery("repoData", () =>
-    axios.get("http://localhost:5000/products").then((res) =>  res.data)
+import Managesingleuser from "./Managesingleuser";
+
+const Manageuser = () => {
+  const { isLoading, error, data, refetch } = useQuery("repoUser", () =>
+    axios.get("http://localhost:5000/users").then((res) => res.data)
   );
- 
-  const handelDelete = (id) => {
-    axios
-      .post("http://localhost:5000/removeproduct", { _id: id })
-      .then((res) =>{
-        refetch();
-      });
-  };
+  const handelMakeAdmin=(email)=>{
+     axios.post("http://localhost:5000/makeadmin",{email:email})
+     .then(res=>{
+       console.log(res.data);
+       refetch();
+     })
+  }
+  
   return (
     <div>
       {!isLoading && (
@@ -31,8 +30,8 @@ const Manageproducts = () => {
                   <thead className="text-black">
                     <tr>
                       <th>Name</th>
-                      <th>Supplier</th>
-                      <th>Quantity</th>
+                      <th>Email</th>
+                      <th>Role</th>
                       <th>Option</th>
                     </tr>
                   </thead>
@@ -40,20 +39,14 @@ const Manageproducts = () => {
                   <tbody className="text-black">
                     {data.length > 0 &&
                       data.map((sp) => {
-                        return (
-                          <Singleproductmanage
-                            key={sp._id}
-                            data={sp}
-                            handelDelete={handelDelete}
-                          />
-                        );
+                        return <Managesingleuser key={sp._id} data={sp} handelMakeAdmin={handelMakeAdmin} />;
                       })}
                   </tbody>
                   <tfoot>
                     <tr className="text-black">
                       <th>Name</th>
-                      <th>Supplier</th>
-                      <th>Quantity</th>
+                      <th>Email</th>
+                      <th>Role</th>
                       <th>Option</th>
                     </tr>
                   </tfoot>
@@ -67,4 +60,4 @@ const Manageproducts = () => {
   );
 };
 
-export default Manageproducts;
+export default Manageuser;

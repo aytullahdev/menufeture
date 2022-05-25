@@ -14,9 +14,9 @@ const Dashboard = () => {
         <div className="bg-orange-600 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400">
           ORDERS
         </div>
-        <div className="bg-indigo-500 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400">
+        <Link to="/dashboard/manageuser" className="bg-indigo-500 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400">
           Manage Users
-        </div>
+        </Link>
         <Link to="/dashboard/products" className="bg-green-600 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400">
           MANAGE PRODUCT
         </Link>

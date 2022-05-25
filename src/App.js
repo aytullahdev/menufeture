@@ -15,6 +15,9 @@ import Manageproducts from "./Components/Sections/Products/Manageproducts";
 import axios from "axios";
 import Profile from "./Components/User/Profile";
 import Editproduct from "./Components/Sections/Products/Editproduct";
+import Manageuser from "./Components/Admin/Manageuser";
+import Requreduser from "./Components/Secure/Requreduser";
+import RequredAdmin from "./Components/Secure/RequredAdmin";
 
 function App() {
   const navigation = useNavigate();
@@ -38,17 +41,18 @@ function App() {
         <div className="  bg-[#EDF0F6] lg:col-start-3 lg:col-end-13 ">
           <Routes>
             <Route path="/" element={<Home/>} />
-            <Route path="/dashboard" element={<Dashboard/>}>
+            <Route path="/dashboard" element={<Requreduser><RequredAdmin><Dashboard/></RequredAdmin></Requreduser>}>
                 <Route path="addproduct" element={<Addproduct/>}/>
                 <Route path="products" element={<Manageproducts/>}/>
                 <Route path="inventory/:id" element={<Editproduct/>}/>
+                <Route path="manageuser" element={<Manageuser/>}/>
             </Route>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/resetpwd" element={<Resepassword/>}/>
             <Route path="/products" element={<Products/>}/>
-            <Route path="products/details/:id" element={<ProductDetail/>}/>
-            <Route path="/profile" element={<Profile/>}/>
+            <Route path="products/details/:id" element={<Requreduser><ProductDetail/></Requreduser>}/>
+            <Route path="/profile" element={<Requreduser><Profile/></Requreduser>}/>
             <Route path="/profile/:id" element={<Profile/>}/>
             <Route path="*" element={<Notfound/>}/>
           </Routes>

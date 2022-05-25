@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Singleproductmanage = ({ data }) => {
+const Singleproductmanage = ({ data, handelDelete }) => {
   return (
   
       <tr>
@@ -23,13 +23,14 @@ const Singleproductmanage = ({ data }) => {
           </span>
         </td>
         <td>{data.quan || 12}</td>
-        <th>
+        <th className=" space-x-2">
           <Link
             to={`/dashboard/inventory/${data._id}`}
             className="btn btn-primary text-white btn-xs ml-2"
           >
             Details
           </Link>
+          <button className="btn btn-xs btn-warning text-white hover:bg-yellow-600" onClick={()=>handelDelete(data._id)}>Delete</button>
         </th>
       </tr>
     
