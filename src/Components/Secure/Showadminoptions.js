@@ -18,11 +18,16 @@ const Showadminoptions = ({children}) => {
            console.log(res.data);
        })
    },[])
-   if(!id || !user || !udata) return;
-   if(udata && user?.email===udata?.email && udata.role==='admin'){
-       return children;
+   if(loading) return;
+   if(user){
+       if(udata){
+           if(user.email===udata.email && udata.role==='admin'){
+               return children;
+           }
+       }
    }
-   return ;
+return ;
+  
 };
 
 export default Showadminoptions;
