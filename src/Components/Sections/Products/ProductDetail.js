@@ -16,7 +16,7 @@ const ProductDetail = () => {
     return (
         <div>
             {
-                product && <div className='grid grid-cols-2 text-black'>
+                product && <div className='grid grid-cols-1 text-black'>
                 <SingleProductDetails product={product}/>
                 <Orderfrom product={product}/>
                 </div>

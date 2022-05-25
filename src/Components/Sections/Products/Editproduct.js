@@ -1,10 +1,12 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 const Editproduct = () => {
   const { id } = useParams();
+  let navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const {
     register,
@@ -19,9 +21,16 @@ const Editproduct = () => {
      })
   }, [id])
   const onSubmit = (data) => {
-    const sendData ={...data,_id:id};
+    const sendData ={...product,...data};
     axios.post("http://localhost:5000/addproduct", sendData).then((res) => {
-      console.log(res);
+       if(res.data?.modifiedCount===1){
+         toast.success("Product Updated Sucessfully");
+         navigate("/dashboard/products");
+       }else if(res.data?.modifiedCount===0){
+         toast.info("Noting Is changed")
+       }else{
+         toast.error("Try again Later")
+       }
      
     });
   };
@@ -37,12 +46,12 @@ const Editproduct = () => {
             <input
               type="text"
               placeholder="Product Name"
-              {...register("productName", { required: true })}
+              {...register("tittle", { required: true })}
               className="input input-bordered"
-              defaultValue={product.name}
+              defaultValue={product.tittle}
             />
             <label className=" label text-sm text-red-500">
-              {errors.productName && <span>This field is required</span>}
+              {errors.tittle && <span>This field is required</span>}
             </label>
           </div>
           <div className="from-control grid grid-cols-2 gap-5">
@@ -55,11 +64,11 @@ const Editproduct = () => {
                 placeholder="Price"
                 min={1}
                 defaultValue={product.price}
-                {...register("productPrice", { required: true, min: 1 })}
+                {...register("price", { required: true, min: 1 })}
                 className="input input-bordered"
               />
               <label className=" label text-sm text-red-500">
-                {errors.productPrice && <span>This field is required</span>}
+                {errors.price && <span>This field is required</span>}
               </label>
             </div>
             <div className="form-control">
@@ -70,12 +79,12 @@ const Editproduct = () => {
                 type="number"
                 placeholder="Quantity"
                 min={1}
-                {...register("productQuantity", { required: true, min: 1 })}
+                {...register("quan", { required: true, min: 1 })}
                 className="input input-bordered"
                 defaultValue={product.quan}
               />
               <label className=" label text-sm text-red-500">
-                {errors.productQuantity && <span>This field is required</span>}
+                {errors.quan && <span>This field is required</span>}
               </label>
             </div>
           </div>
@@ -87,7 +96,7 @@ const Editproduct = () => {
               type="text"
               placeholder="Product Description"
               defaultValue={product.img}
-              {...register("productImg")}
+              {...register("img")}
               className="block w-full py-1 text-sm font-normal  text-gray-700 bg-white bg-clip-padding px-2 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             />
           </div>
@@ -98,12 +107,12 @@ const Editproduct = () => {
             <textarea
               type="text"
               placeholder="Product Description"
-              {...register("productDesc", { required: true })}
+              {...register("description", { required: true })}
               className="input input-bordered h-20"
-              defaultValue={product.desc}
+              defaultValue={product.description}
             />
             <label className=" label text-sm text-red-500">
-              {errors.productDesc && <span>This field is required</span>}
+              {errors.description && <span>This field is required</span>}
             </label>
           </div>
           <div className="form-control mt-6">

@@ -82,8 +82,8 @@ const Checkout = ({price,paymentid}) => {
   };
 
   return (
-    <div className="mx-10 rounded p-5">
-      <form className=" bg-white p-5" onSubmit={handleSubmit}>
+    <div className="mx-auto w-2/3  rounded p-5">
+      <form className=" bg-white shadow-sm  p-5" onSubmit={handleSubmit}>
         <CardElement
           options={{
             style: {

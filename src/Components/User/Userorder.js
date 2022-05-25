@@ -5,7 +5,7 @@ import Singleorder from "./Singleorder";
 import { useState } from "react";
 import Checkout from "../Sections/Products/Checkout";
 import Addreviews from "./Addreviews";
-
+import Swal from "sweetalert2";
 const Userorder = ({ id, userInfo }) => {
   const [price, setprice] = useState(null);
   const [paymentid, setpaymentid] = useState(null);
@@ -21,10 +21,23 @@ const Userorder = ({ id, userInfo }) => {
     setShowcheckout(true);
   };
   const handelDelete = (id) => {
-    axios.post("http://localhost:5000/delorder", { _id: id }).then((res) => {
-      console.log(res.data);
-      refetch();
-    });
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+            axios.post("http://localhost:5000/delorder", { _id: id }).then((res) => {
+                Swal.fire("Deleted!", "Your Order has been deleted.", "success");
+                refetch();
+              });
+        }
+      });
+   
   };
   const handleReview=(orderid,productId)=>{
       setpaymentid(orderid);

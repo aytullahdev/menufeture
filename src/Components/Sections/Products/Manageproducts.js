@@ -1,20 +1,35 @@
 import React from "react";
 import Singleproductmanage from "./Singleproductmanage";
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import axios from "axios";
 import { useQuery } from "react-query";
+
 const Manageproducts = () => {
   const [products, setProducts] = useState([]);
   const { isLoading, error, data, refetch } = useQuery("repoData", () =>
-    axios.get("http://localhost:5000/products").then((res) =>  res.data)
+    axios.get("http://localhost:5000/products").then((res) => res.data)
   );
- 
+
   const handelDelete = (id) => {
-    axios
-      .post("http://localhost:5000/removeproduct", { _id: id })
-      .then((res) =>{
-        refetch();
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .post("http://localhost:5000/removeproduct", { _id: id })
+          .then((res) => {
+            Swal.fire("Deleted!", "Your Product has been deleted.", "success");
+            refetch();
+          });
+      }
+    });
   };
   return (
     <div>

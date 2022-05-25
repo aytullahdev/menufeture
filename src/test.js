@@ -1,3 +1,4 @@
+
 const data = {
     "data": {
       "featuredProducts": {
@@ -6162,7 +6163,15 @@ const data = {
           //console.log(data.data[i].data.products[j].product.document.data.description);
          // console.log(data.data[i].data.products[j].product.document.data.introduction.text);
           //console.log(data.data[i].data.products[j].product.document.data.images[0].image.gatsbyImageData.images.fallback.src);
-          products.push({catagory:data.data[i].data.name.text,tittle:data.data[i].data.products[j].product.document.data.title,description:data.data[i].data.products[j].product.document.data.description,introduction:data.data[i].data.products[j].product.document.data.introduction.text,img:data.data[i].data.products[j].product.document.data.images[0].image.gatsbyImageData.images.fallback.src})
+          products.push({catagory:data.data[i].data.name.text,tittle:data.data[i].data.products[j].product.document.data.title,description:data.data[i].data.products[j].product.document.data.description,introduction:data.data[i].data.products[j].product.document.data.introduction.text,img:data.data[i].data.products[j].product.document.data.images[0].image.gatsbyImageData.images.fallback.src,price:Math.ceil(Math.random()*1000),quan:Math.ceil(Math.random()*100)})
       }
   }
   console.log(products);
+  products.map(el=>{
+     fetch('http://localhost:5000/addproduct',{
+      method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(el)}).then(res=>res.json()).then(res=>console.log(res))
+    return el;
+  
+  })

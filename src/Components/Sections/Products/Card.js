@@ -7,7 +7,7 @@ const Card = ({data}) => {
                 <img className='h-40 w-full object-cover' src={data.img} alt="" />
             </div>
             <div className='p-5'>
-                <h2 className='text-xl py-2'>{data.name}</h2>
+                <h2 className='text-md  font-semibold py-2'>{data.tittle}</h2>
                 <div>
                     <p>Quantity: <span className='bg-orange-500 text-white p-1 rounded-full text-sm'>{data.quan==='0'?"OUT OF STOCK":data.quan}</span></p>
                     

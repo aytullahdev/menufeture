@@ -39,9 +39,9 @@ const Orderfrom = ({ product }) => {
     return "...Loading";
   }
   return (
-    <div>
+    <div className="">
       {!loading && !showcheckout && (
-        <div class="card flex-shrink-0 w-full max-w-sm rounded-none bg-base-100">
+        <div class="card flex-shrink-0 w-full mx-auto max-w-sm my-2 rounded-none bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} class="card-body">
             <h1>ORDER NOW</h1>
             <div class="form-control">
