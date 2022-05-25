@@ -11,9 +11,9 @@ const Dashboard = () => {
         >
           ADD PRODUCT
         </Link>
-        <div className="bg-orange-600 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400">
+        <Link to="/dashboard/orders" className="bg-orange-600 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400">
           ORDERS
-        </div>
+        </Link>
         <Link to="/dashboard/manageuser" className="bg-indigo-500 text-xl uppercase rounded p-4 cursor-pointer hover:bg-green-400">
           Manage Users
         </Link>

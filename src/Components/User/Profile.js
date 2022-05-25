@@ -6,31 +6,26 @@ import Notfound from "../Errorpage/Notfound";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Auth from "../Firebase.init";
 import UpdateprofileModal from "./UpdateprofileModal";
+import { useQuery } from "react-query";
+import Userorder from "./Userorder";
 const Profile = () => {
   const [user, loading] = useAuthState(Auth);
-  const [userinfo, setUserinfo] = useState({});
+  
   const userId = useParams().id || localStorage.getItem("userid");
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/user/${userId}`)
-      .then((res) => {
-        if (res.data?.email) {
-          setUserinfo(res.data);
-          console.log(res.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err.response.status);
-        if (err.response.status === 404) {
-          setUserinfo(null);
-        }
-      });
-  }, []);
+  const { isLoading, error, data, refetch } = useQuery("userData", () =>
+    axios.get(`http://localhost:5000/user/${userId}`).then((res) => res.data)
+  );
+  
+  if(isLoading ){
+    refetch();
+     return '...Loading';
+  }
+  
   return (
     <>
     
-      {userinfo  ? (
-        <div className="text-black bg-white grid grid-col-1 lg:grid-cols-3 p-4">
+      {!isLoading && data  ? (
+        <div className="text-black bg-white grid grid-col-1 lg:grid-cols-2 p-4">
           <div className="flex justify-center">
             <div class="avatar">
               <div class="h-32 w-32 rounded-full">
@@ -48,20 +43,20 @@ const Profile = () => {
             </h1>
             <div className="text-left py-5 px-2">
               <h3>
-                Name: <span className="text-md px-5 ">{userinfo.name}</span>
+                Name: <span className="text-md px-5 ">{data.name}</span>
               </h3>
               <h3>
-                Email:<span className="text-md px-5 ">{userinfo.email}</span>
+                Email:<span className="text-md px-5 ">{data.email}</span>
               </h3>
               <p>
                 Location:
-                <span className="text-md px-5 ">{userinfo.location}</span>
+                <span className="text-md px-5 ">{data.location}</span>
               </p>
               <p>
                 Linkdin:
-                <span className="text-md px-5 "><a target="_blank" className=" link link-hover" href={userinfo.linkdin}>linkdin profile</a></span>
+                <span className="text-md px-5 "><a target="_blank" className=" link link-hover" href={data.linkdin}>linkdin profile</a></span>
               </p>
-              {user && !loading  && user.email === userinfo.email && (
+              {user && !loading  && user.email === data.email && (
                 <label
                   for="update-profile-modal"
                   className="btn btn-success text-white mt-2"
@@ -71,11 +66,15 @@ const Profile = () => {
               )}
             </div>
           </div>
-          <UpdateprofileModal userinfo={userinfo}/>
+         
+          <UpdateprofileModal userinfo={data} refetch={refetch}/>
         </div>
+        
       ) : (
         <Notfound />
       )}
+      {!isLoading && data && <Userorder id={data._id} userInfo={data}/>}
+      
     </>
   );
 };

@@ -3,8 +3,13 @@ import { useState, useEffect } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { error } from "daisyui/src/colors";
 import axios from "axios";
-const Checkout = ({price}) => {
+import { toast } from "react-toastify";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+const Checkout = ({price,paymentid}) => {
    const [carderror, setCarderror] = useState(null)
+   let location = useLocation();
+   const navigation = useNavigate();
+   const [showReviewbox, setShowReviewbox] = useState(false)
   const stripe = useStripe();
   const elements = useElements();
   const [clientsecreat,setClientsecreat]=useState('');
@@ -57,7 +62,21 @@ const Checkout = ({price}) => {
           setCarderror(intentError?.message);
         }else{
           setCarderror('');
-          console.log("Sucessfully Payment");
+          console.log(paymentid);
+          axios.post('http://localhost:5000/payment',{_id:paymentid})
+          .then(res=>{
+            if(res.data.matchedCount===1){
+              toast.success("Payment Sucessfull");
+              navigation('/profile')
+              
+            }else{
+              toast.error("Some Error Occured! Plz Try again Later");
+              navigation('/profile')
+              
+            }
+           
+          })
+         
         }
     }
   };

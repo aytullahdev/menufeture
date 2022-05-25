@@ -1,9 +1,10 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import Profile from "./Profile";
 
-const UpdateprofileModal = ({ userinfo }) => {
+const UpdateprofileModal = ({ userinfo,refetch }) => {
     const {
         register,
         handleSubmit,
@@ -16,8 +17,10 @@ const UpdateprofileModal = ({ userinfo }) => {
        axios.post('http://localhost:5000/updateprofile',updateData)
        .then(res=>{
            console.log(res.data);
-           reset();
+           refetch();
+           toast.success("Data is updated")
            //Do Next thing
+           document.getElementById('update-profile-modal').classList.toggle('.modal-open')
        })
 
        
@@ -57,60 +60,75 @@ const UpdateprofileModal = ({ userinfo }) => {
                       <span class="label-text">Name</span>
                     </label>
                     <input
-                    {...register("name")}
+                    {...register("name",{required:true})}
                       type="text"
                       placeholder="Name"
                       class="input input-bordered"
                       defaultValue={userinfo.name}
                     />
+                     <label className="label text-red-400">
+                      {errors.name &&  <span className=" label-text text-warning">This filed is required</span> }
+                    </label>
                   </div>
                   <div class="form-control">
                     <label class="label">
                       <span class="label-text">Phone</span>
                     </label>
                     <input
-                    {...register("phone")}
+                    {...register("phone",{required:true})}
                       type="text"
                       placeholder="Phone"
                       defaultValue={userinfo.phone}
                       class="input input-bordered"
                     />
+                     <label className="label text-red-400">
+                      {errors.phone &&  <span className=" label-text text-warning">This filed is required</span> }
+                    </label>
                   </div>
                   <div class="form-control">
                     <label class="label">
                       <span class="label-text">Linkdin</span>
                     </label>
                     <input
-                    {...register("linkdin")}
+                    {...register("linkdin",{required:true})}
                       type="text"
                       placeholder="Linkdin"
                       class="input input-bordered"
                       defaultValue={userinfo.linkdin}
                     />
+                     <label className="label text-red-400">
+                      {errors.linkdin &&  <span className=" label-text text-warning">This filed is required</span> }
+                    </label>
                   </div>
                   <div class="form-control">
                     <label class="label">
                       <span class="label-text">Education</span>
                     </label>
                     <input
-                    {...register("education")}
+                    {...register("education",{required:true})}
                       type="text"
                       placeholder="education"
                       class="input input-bordered"
                       defaultValue={userinfo.education}
                     />
+                     <label className="label text-red-400">
+                      {errors.education &&  <span className=" label-text text-warning">This filed is required</span> }
+                    </label>
                   </div>
                   <div class="form-control">
                     <label class="label">
                       <span class="label-text">Adress</span>
                     </label>
                     <textarea
-                    {...register("location")}
+                    {...register("location",{required:true})}
                       type="text"
                       placeholder="location"
                       class="input input-bordered"
                       defaultValue={userinfo.location}
                     />
+                    <label className="label text-red-400">
+                      {errors.location &&  <span className=" label-text text-warning">This filed is required</span> }
+                    </label>
                   </div>
                   <div class="form-control mt-6">
                     <button class="btn btn-primary">Update</button>

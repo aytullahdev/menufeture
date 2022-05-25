@@ -4,12 +4,17 @@ import { useState } from "react";
 import Checkout from "./Checkout";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import axios from "axios";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Auth from "../../Firebase.init";
 const stripePromise = loadStripe(
   "pk_test_51L2sXgF65j8JGYI7Esqw7JbRwzdYqdwhSDkR3Nc0pKE4ormrjsxeJSRWgZmflJmc8F8Iazdshcy0QaUEATogVfCd00tunE8JIm"
 );
 const Orderfrom = ({ product }) => {
+   const [user,loading]=useAuthState(Auth)
   const [showcheckout, setShowcheckout] = useState(false);
   const [price,setPrice]= useState(0)
+  const [paymentid,setPaymentid]=useState(null);
   const {
     register,
     handleSubmit,
@@ -18,11 +23,24 @@ const Orderfrom = ({ product }) => {
   } = useForm();
   const onSubmit = (data) => {
     setPrice(product.price*data.quan);
-    setShowcheckout(true);
+    //insert the order into order database the database and get an id;
+    axios.post('http://localhost:5000/order',{...data,total:product.price*data.quan,productid:product._id,userid:localStorage.getItem('userid')})
+    .then(res=>{
+       if(res?.data?.insertedId){
+          setPaymentid(res.data.insertedId);
+          setShowcheckout(true)
+       }
+    })
+    
+
+   // setShowcheckout(true);
   };
+  if(loading){
+    return "...Loading";
+  }
   return (
     <div>
-      {!showcheckout && (
+      {!loading && !showcheckout && (
         <div class="card flex-shrink-0 w-full max-w-sm rounded-none bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} class="card-body">
             <h1>ORDER NOW</h1>
@@ -33,8 +51,10 @@ const Orderfrom = ({ product }) => {
               <input
                 type="text"
                 placeholder="email"
-                {...register("email", { required: true })}
+                {...register("email")}
+                defaultValue={user.email}
                 class="input input-bordered"
+                readOnly
               />
               <label className=" label text-red-500">
                 {errors.email && <span>This filed is requres</span>}
@@ -90,7 +110,7 @@ const Orderfrom = ({ product }) => {
       )}
       {showcheckout && (
         <Elements stripe={stripePromise}>
-          <Checkout price={price}/>
+          <Checkout price={price} paymentid={paymentid}/>
         </Elements>
       )}
     </div>

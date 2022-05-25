@@ -14,10 +14,10 @@ const Navbar = () => {
        <Navlink to="/products" text="Product"/>
        <Navlink text="Blogs"/>
        <Navlink text="About"/>
-      <Showadminoptions> <Navlink to="/dashboard" text="Dashboard"/></Showadminoptions>
+      { !loading && <Showadminoptions> <Navlink to="/dashboard" text="Dashboard"/></Showadminoptions>}
        {user && <Navlink to="/profile" text="Profile"/>}
        {!user && <Navlink to="/login" text="Login"/>}
-       {user && <button className="btn mx-5" onClick={()=>{signOut(Auth);localStorage.setItem('userid','');localStorage.setItem('adminid','')}}>Signout</button>}
+       {user && <button className="btn mx-5" onClick={()=>{signOut(Auth);localStorage.clear('userid');localStorage.clear('adminid')}}>Signout</button>}
      
       
       

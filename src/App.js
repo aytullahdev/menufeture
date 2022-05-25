@@ -18,6 +18,9 @@ import Editproduct from "./Components/Sections/Products/Editproduct";
 import Manageuser from "./Components/Admin/Manageuser";
 import Requreduser from "./Components/Secure/Requreduser";
 import RequredAdmin from "./Components/Secure/RequredAdmin";
+import { ToastContainer} from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+import Userorders from "./Components/Admin/Userorders";
 
 function App() {
   const navigation = useNavigate();
@@ -46,6 +49,7 @@ function App() {
                 <Route path="products" element={<Manageproducts/>}/>
                 <Route path="inventory/:id" element={<Editproduct/>}/>
                 <Route path="manageuser" element={<Manageuser/>}/>
+                <Route path="orders" element={<Userorders/>}/>
             </Route>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
@@ -57,7 +61,7 @@ function App() {
             <Route path="*" element={<Notfound/>}/>
           </Routes>
         </div>
-        
+        <ToastContainer />
       </div>
     </div>
   );
