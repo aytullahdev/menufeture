@@ -8,9 +8,11 @@ const RequredAdmin = ({children}) => {
     const [user,loading] = useAuthState(Auth);
      const [udata, setUdata] = useState(null)
      let location = useLocation();
+     const id =localStorage.getItem('adminid');
     useEffect(()=>{
-        console.log(localStorage.getItem('adminid'));
-        axios.post('http://localhost:5000/isadmin',{_id:localStorage.getItem('adminid')})
+        console.log(localStorage.getItem('adminid'))
+        if(!id || id==="") return;
+        axios.post('http://localhost:5000/isadmin',{_id:id})
         .then(res=>{
             setUdata(res.data);
             console.log(res.data);
