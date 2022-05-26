@@ -75,6 +75,7 @@ const Userorder = ({ id, userInfo }) => {
                       <th>Price</th>
                       <th>Payment</th>
                       <th>Option</th>
+                      <th>Order</th>
                     </tr>
                   </thead>
 
@@ -100,6 +101,7 @@ const Userorder = ({ id, userInfo }) => {
                       <th>Price</th>
                       <th>Payment</th>
                       <th>Option</th>
+                      <th>Order</th>
                     </tr>
                   </tfoot>
                 </table>

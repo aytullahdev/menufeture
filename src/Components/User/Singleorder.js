@@ -72,7 +72,7 @@ const Singleorder = ({
             >
               Pay
             </label>
-
+           
             <label
               for="user-payment"
               onClick={() => handleReview(data._id, product._id)}
@@ -88,6 +88,9 @@ const Singleorder = ({
             >
               Delete
             </button>
+          </th>
+          <th>
+          <button   className="btn btn-xs btn-warning text-white " disabled={data.pending} >{data.pending?"wating":"Accepted"}</button>
           </th>
         </tr>
       )}

@@ -18,7 +18,7 @@ const SingleProductDetails = ({ product }) => {
             <p>{product.description}</p>
             <div class="card-actions justify-start flex flex-col">
               <div class="badge badge-secondary badge-outline">Price: {product.price}</div>
-              <div class="badge badge-outline">Quantity {product.quan}</div>
+              <div class="badge badge-outline">Quantity {product.quan==0?"OUT OF STOCK":product.quan}</div>
             </div>
           </div>
         </div>

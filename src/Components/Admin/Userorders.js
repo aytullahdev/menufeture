@@ -37,7 +37,7 @@ const Userorders = () => {
                   <tbody className="text-black">
                     {data.length > 0 &&
                       data.map((sp) => {
-                        return <Singleorders key={sp._id} data={sp}  />;
+                        return <Singleorders key={sp._id} data={sp} refetch={refetch}  />;
                       })}
                   </tbody>
                   <tfoot>

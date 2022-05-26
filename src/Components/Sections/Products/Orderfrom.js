@@ -25,7 +25,7 @@ const Orderfrom = ({ product }) => {
   const onSubmit = (data) => {
     setPrice(product.price*data.quan);
     //insert the order into order database the database and get an id;
-    axios.post('https://menufeture.herokuapp.com/order',{...data,total:product.price*data.quan,productid:product._id,userid:localStorage.getItem('userId')})
+    axios.post('http://localhost:5000/order',{...data,total:product.price*data.quan,productid:product._id,userid:localStorage.getItem('userId')})
     .then(res=>{
        if(res?.data?.insertedId){
           setPaymentid(res.data.insertedId);
@@ -104,7 +104,7 @@ const Orderfrom = ({ product }) => {
               </label>
             </div>
             <div class="form-control mt-6">
-              <button class="btn bg-green-500 border-none hover:bg-green-600">
+              <button disabled={product.quan===0} class="btn bg-green-500 border-none hover:bg-green-600">
                 Check OUT
               </button>
             </div>

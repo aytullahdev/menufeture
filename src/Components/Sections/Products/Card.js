@@ -9,7 +9,7 @@ const Card = ({data}) => {
             <div className='p-5'>
                 <h2 className='text-md  font-semibold py-2'>{data.tittle}</h2>
                 <div>
-                    <p>Quantity: <span className='bg-orange-500 text-white p-1 rounded-full text-sm'>{data.quan==='0'?"OUT OF STOCK":data.quan}</span></p>
+                    <p>Quantity: <span className='bg-orange-500 text-white p-1 rounded-full text-sm'>{data.quan===0?"OUT OF STOCK":data.quan}</span></p>
                     
                 </div>
                 <p className='text-xl py-2'>Start From <span className='font-bold text-green-500'>${data.price}</span></p>
