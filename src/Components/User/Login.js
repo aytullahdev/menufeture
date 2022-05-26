@@ -1,5 +1,5 @@
 import React from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Auth from "../Firebase.init";
@@ -11,6 +11,29 @@ const Login = () => {
   let from = location.state?.from?.pathname || "/";
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(Auth);
+    const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(Auth);
+    if(!gloading && !gerror && guser){
+      if(guser){
+        console.log(guser);
+        const userData = {email:guser.user.email,name:'',education:'',location:'',phone:'',linkdin:''};
+        console.log(userData);
+        axios.post('https://menufeture.herokuapp.com/user',userData)
+        .then(res=>{
+          reset();
+          const data = {email:guser.user.email};
+          axios.post('https://menufeture.herokuapp.com/login',data)
+          .then((res)=>{
+              if(res.data.token){
+              localStorage.setItem("userToken",res.data.token);
+              localStorage.setItem("userId",res.data.id);
+              console.log(res);
+              navigate(from, { replace: true });
+              }
+            
+          })
+        })
+    }
+    }
   const {
     register,
     handleSubmit,
@@ -38,6 +61,7 @@ const Login = () => {
      
     }
   }, [user]);
+  
 
   return (
     <div className="flex justify-center text-black items-center min-h-screen">
@@ -82,12 +106,16 @@ const Login = () => {
             </label>
           </div>
           <div class="form-control mt-6">
-            <button class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
             <label className="label-text-alt link link-hover text-left py-2">
               <Link to="/signup">Create a new account</Link>
             </label>
           </div>
+          <div class="divider">OR</div>
+          <button type="button" className="btn" onClick={()=>{ signInWithGoogle()}}>CONTINUE WITH GOOGLE</button>
         </div>
+        
+
       </form>
     </div>
   );
