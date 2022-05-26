@@ -22,14 +22,22 @@ const Showadminoptions = ({ children }) => {
           console.log(res.data);
         });
     }
-  }, []);
+  }, [user,loading]);
   
   if (udata) {
     if (udata.result === true) {
       return children;
     } 
   }else{
+    if (udata?.result === true) {
+      return children;
+    } 
     return ;
+  }
+  if(user){
+    if (udata?.result === true) {
+      return children;
+    } 
   }
 };
 
