@@ -7,7 +7,7 @@ import Auth from "../Firebase.init";
 const Showadminoptions = ({ children }) => {
   const [user, loading] = useAuthState(Auth);
   const [udata, setUdata] = useState(null);
-  const id = localStorage.getItem("adminid");
+  const id = localStorage.getItem("userId");
 
   useEffect(() => {
     console.log();
@@ -15,7 +15,7 @@ const Showadminoptions = ({ children }) => {
     if (id) {
       axios
         .post("https://menufeture.herokuapp.com/isadmin", {
-          _id: localStorage.getItem("adminid"),
+          _id: localStorage.getItem("userId"),
         })
         .then((res) => {
           setUdata(res.data);
@@ -25,9 +25,11 @@ const Showadminoptions = ({ children }) => {
   }, []);
   
   if (udata) {
-    if (udata.role === "admin") {
+    if (udata.result === true) {
       return children;
     } 
+  }else{
+    return ;
   }
 };
 

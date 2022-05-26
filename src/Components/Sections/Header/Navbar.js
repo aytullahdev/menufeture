@@ -4,11 +4,19 @@ import Auth from "../../Firebase.init";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 const Navbar = () => {
   const [user, loading] = useAuthState(Auth);
   const [isAdmin, setisAdmin] = useState(false);
-
+  useEffect(() => {
+    axios.post('https://menufeture.herokuapp.com/isadmin',{_id:localStorage.getItem('userId')})
+    .then(res=>{
+        setisAdmin(res.data.result)
+       
+    })
+  }, [user])
+  
   return (
     <div>
       <div class="navbar bg-base-100  text-black">

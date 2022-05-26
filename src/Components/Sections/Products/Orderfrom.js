@@ -25,7 +25,7 @@ const Orderfrom = ({ product }) => {
   const onSubmit = (data) => {
     setPrice(product.price*data.quan);
     //insert the order into order database the database and get an id;
-    axios.post('https://menufeture.herokuapp.com/order',{...data,total:product.price*data.quan,productid:product._id,userid:localStorage.getItem('userid')})
+    axios.post('https://menufeture.herokuapp.com/order',{...data,total:product.price*data.quan,productid:product._id,userid:localStorage.getItem('userId')})
     .then(res=>{
        if(res?.data?.insertedId){
           setPaymentid(res.data.insertedId);

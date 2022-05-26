@@ -26,13 +26,16 @@ import Blogs from "./Components/Sections/Blogs/Blogs";
 function App() {
   const navigation = useNavigate();
   axios.interceptors.request.use(request=>{
-   
+    request.headers.authorization = localStorage.getItem('userToken');
     return request;
   })
   axios.interceptors.response.use(response=>{
     
     if(response.status===404 || response.request.status===404 ){
       navigation('/notfound');
+    }
+    if(response.status===401 || response.request.status===403 ){
+      navigation('/login');
     }
     return response;
   })

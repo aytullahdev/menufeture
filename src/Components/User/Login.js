@@ -27,13 +27,13 @@ const Login = () => {
       const data = {email:user.user.email};
       axios.post('https://menufeture.herokuapp.com/login',data)
       .then((res)=>{
-        if(res.data?._id){
-          localStorage.setItem("userid",res.data._id);
-          if(res.data.role==='admin'){
-            localStorage.setItem("adminid",res.data._id);
-          }
+          if(res.data.token){
+          localStorage.setItem("userToken",res.data.token);
+          localStorage.setItem("userId",res.data.id);
+          console.log(res);
           navigate(from, { replace: true });
-        }
+          }
+        
       })
      
     }

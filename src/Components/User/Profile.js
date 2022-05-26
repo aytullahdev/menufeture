@@ -11,7 +11,7 @@ import Userorder from "./Userorder";
 const Profile = () => {
   const [user, loading] = useAuthState(Auth);
   
-  const userId = useParams().id || localStorage.getItem("userid");
+  const userId = useParams().id || localStorage.getItem("userId");
   const { isLoading, error, data, refetch } = useQuery("userData", () =>
     axios.get(`https://menufeture.herokuapp.com/user/${userId}`).then((res) => res.data)
   );

@@ -8,15 +8,15 @@ const RequredAdmin = ({children}) => {
     const [user,loading] = useAuthState(Auth);
      const [udata, setUdata] = useState(null)
      let location = useLocation();
-     const id =localStorage.getItem('adminid');
+     const id =localStorage.getItem('userId');
     useEffect(()=>{
-        console.log(localStorage.getItem('adminid'))
+        console.log(localStorage.getItem('userId'))
         
         if(!id || id==="") return;
         axios.post('https://menufeture.herokuapp.com/isadmin',{_id:id})
         .then(res=>{
             setUdata(res.data);
-            console.log(res.data);
+           
         })
     },[])
     if(!id){return <Navigate to="/profile" state={{ from: location }} replace></Navigate>;}
@@ -26,7 +26,7 @@ const RequredAdmin = ({children}) => {
     if(!user ){
         return <Navigate to="/login" state={{ from: location }} replace></Navigate>
     }
-    if(user.email===udata.email && udata.role==='admin'){
+    if(udata && udata.result===true){
         return children;
     }
     return <Navigate to="/login" state={{ from: location }} replace></Navigate>
