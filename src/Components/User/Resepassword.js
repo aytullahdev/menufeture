@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const Resepassword = () => {
     const {
         register,
@@ -17,7 +17,7 @@ const Resepassword = () => {
     <div className="flex justify-center text-black items-center min-h-screen">
       <div class="card py-2 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
         <h1 className="text-black text-xl uppercase font-bold">
-          Create a Account
+         Reset Passwork
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} class="card-body">
           <div class="form-control">
@@ -35,7 +35,7 @@ const Resepassword = () => {
             </label>
           </div>
           <div class="form-control mt-6">
-            <button class="btn btn-primary">SEND MAIL</button>
+            <button class="btn btn-primary" onClick={()=>{toast.success("Email sended");}}>SEND MAIL</button>
           </div>
         </form>
       </div>
