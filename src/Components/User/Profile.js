@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Notfound from "../Errorpage/Notfound";
@@ -10,7 +10,14 @@ import { useQuery } from "react-query";
 import Userorder from "./Userorder";
 const Profile = () => {
   const [user, loading] = useAuthState(Auth);
-  
+  const [isAdmin, setisAdmin] = useState(false);
+  useEffect(() => {
+    axios.post('https://menufeture.herokuapp.com/isadmin',{_id:localStorage.getItem('userId')})
+    .then(res=>{
+        setisAdmin(res.data.result)
+       
+    })
+  }, [user])
   const userId = useParams().id || localStorage.getItem("userId");
   const { isLoading, error, data, refetch } = useQuery("userData", () =>
     axios.get(`https://menufeture.herokuapp.com/user/${userId}`).then((res) => res.data)
@@ -63,6 +70,14 @@ const Profile = () => {
                 >
                   Update Profile
                 </label>
+              )}
+              {user && !loading  && user.email === data.email && isAdmin && (
+                <Link
+                 to="/dashboard"
+                  className="btn ml-2 btn-warning text-white mt-2"
+                >
+                  Dashboard
+                </Link>
               )}
             </div>
           </div>

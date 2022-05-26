@@ -14,7 +14,7 @@ const Singleorders = ({data,refetch}) => {
       confirmButtonText: "Accept the order",
     }).then((result) => {
       if (result.isConfirmed) {
-          axios.post("http://localhost:5000/acceptorder",data).then((res)=>{
+          axios.post("https://menufeture.herokuapp.com/acceptorder",data).then((res)=>{
             console.log(res.data);
             if(res.data.modifiedCount===1){
                Swal.fire("Updated!", "Order is Accepted.", "success");
@@ -47,7 +47,7 @@ const Singleorders = ({data,refetch}) => {
       <td>{data.payment?"PAYED":"UNPAID"}</td>
       <td className=" space-x-2">
         <button className="btn btn-xs btn-primary text-white ">Details</button>
-        <button onClick={()=>(handleAccept(data._id))} disabled={!(data.payment===true && data.pending===true)} className="btn btn-xs btn-warning text-white "  >Accept</button>
+        <button onClick={()=>(handleAccept(data._id))} disabled={!(data.payment===true && data.pending===true)} className="btn btn-xs btn-warning text-white "  >{data.pending?"Accept":"Accepted"}</button>
         
       </td>
     </tr>
