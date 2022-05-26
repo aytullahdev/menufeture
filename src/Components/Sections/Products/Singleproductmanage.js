@@ -12,7 +12,7 @@ const Singleproductmanage = ({ data, handelDelete }) => {
               </div>
             </div>
             <div>
-              <div className="font-bold">{data.name}</div>
+              <div className="font-bold">{data.tittle}</div>
               <div className="text-sm opacity-50">${data.price}</div>
             </div>
           </div>
