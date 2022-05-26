@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 const Products = ({limit}) => {
    
    const { isLoading, error, data, refetch } = useQuery("products", () =>
-    axios.get(`http://localhost:5000/products?limit=${limit || 100 }`).then((res) => res.data)
+    axios.get(`https://menufeture.herokuapp.com/products?limit=${limit || 100 }`).then((res) => res.data)
   );
   if(isLoading){
     return <progress class="progress w-56"></progress>;

@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import {Link} from 'react-router-dom'
 const Reviews = () => {
   const { isLoading, error, data, refetch } = useQuery("reviews", () =>
-    axios.get(`http://localhost:5000/reviews`).then((res) => res.data)
+    axios.get(`https://menufeture.herokuapp.com/reviews`).then((res) => res.data)
   );
   return (
     <div className="bg-white text-black py-5">

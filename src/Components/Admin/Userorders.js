@@ -5,7 +5,7 @@ import Singleorders from './Singleorders';
 
 const Userorders = () => {
         const { isLoading, error, data, refetch } = useQuery("orders", () =>
-    axios.get("http://localhost:5000/orders").then((res) => res.data)
+    axios.get("https://menufeture.herokuapp.com/orders").then((res) => res.data)
   );
   
   

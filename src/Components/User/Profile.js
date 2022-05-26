@@ -13,7 +13,7 @@ const Profile = () => {
   
   const userId = useParams().id || localStorage.getItem("userid");
   const { isLoading, error, data, refetch } = useQuery("userData", () =>
-    axios.get(`http://localhost:5000/user/${userId}`).then((res) => res.data)
+    axios.get(`https://menufeture.herokuapp.com/user/${userId}`).then((res) => res.data)
   );
   
   if(isLoading ){

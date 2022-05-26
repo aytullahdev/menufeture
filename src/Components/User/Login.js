@@ -25,7 +25,7 @@ const Login = () => {
     if (!loading && user) {
       reset();
       const data = {email:user.user.email};
-      axios.post('http://localhost:5000/login',data)
+      axios.post('https://menufeture.herokuapp.com/login',data)
       .then((res)=>{
         if(res.data?._id){
           localStorage.setItem("userid",res.data._id);

@@ -9,7 +9,7 @@ const Addreviews = ({ paymentid, productId , userInfo, setShowReviewbox}) => {
   const [review,setReview]=useState(0)
   const [reviewText, setReviewText] = useState("")
   useEffect(()=>{
-    axios.get(`http://localhost:5000/products/${productId}`)
+    axios.get(`https://menufeture.herokuapp.com/products/${productId}`)
     .then((res)=>{
         setProduct(res.data);
     })
@@ -19,7 +19,7 @@ const handleReview=(val)=>{
 }
 const handelReview=()=>{
     if(userInfo.name===""){toast.error("Plz Update your User Name"); return;}
-    axios.post('http://localhost:5000/postreviews',{productid:productId,paymentid:paymentid,rating:review,text:reviewText,name:userInfo.name
+    axios.post('https://menufeture.herokuapp.com/postreviews',{productid:productId,paymentid:paymentid,rating:review,text:reviewText,name:userInfo.name
 })
     .then(res=>{
         if(res.data.insertedId){

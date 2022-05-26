@@ -15,7 +15,7 @@ const Checkout = ({price,paymentid}) => {
   const elements = useElements();
   const [clientsecreat,setClientsecreat]=useState('');
   useEffect(() => {
-    axios.post("http://localhost:5000/create-payment-intent",{price:price})
+    axios.post("https://menufeture.herokuapp.com/create-payment-intent",{price:price})
     .then(res=>{
       setClientsecreat(res.data.clientSecret)
     })
@@ -64,7 +64,7 @@ const Checkout = ({price,paymentid}) => {
         }else{
           setCarderror('');
           console.log(paymentid);
-          axios.post('http://localhost:5000/payment',{_id:paymentid})
+          axios.post('https://menufeture.herokuapp.com/payment',{_id:paymentid})
           .then(res=>{
             if(res.data.matchedCount===1){
               toast.success("Payment Sucessfull");

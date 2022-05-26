@@ -6168,7 +6168,7 @@ const data = {
   }
   console.log(products);
   products.map(el=>{
-     fetch('http://localhost:5000/addproduct',{
+     fetch('https://menufeture.herokuapp.com/addproduct',{
       method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(el)}).then(res=>res.json()).then(res=>console.log(res))

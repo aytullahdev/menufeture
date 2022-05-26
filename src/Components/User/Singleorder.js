@@ -6,13 +6,13 @@ const Singleorder = ({handelDelete,data,handlePayment,handleReview,showReviewbox
     const [product, setProduct] = useState(null);
     const [hasreview,setHasreview] = useState(false);
     useEffect(()=>{
-        axios.get(`http://localhost:5000/products/${data.productid}`)
+        axios.get(`https://menufeture.herokuapp.com/products/${data.productid}`)
         .then((res)=>{
             setProduct(res.data);
         })
     },[])
     useEffect(()=>{
-      axios.get(`http://localhost:5000/reviews?paymentId=${data._id}`)
+      axios.get(`https://menufeture.herokuapp.com/reviews?paymentId=${data._id}`)
       .then((res)=>{
           if(res.data?.paymentid===data._id){
             setHasreview(true);

@@ -11,17 +11,19 @@ const RequredAdmin = ({children}) => {
      const id =localStorage.getItem('adminid');
     useEffect(()=>{
         console.log(localStorage.getItem('adminid'))
+        
         if(!id || id==="") return;
-        axios.post('http://localhost:5000/isadmin',{_id:id})
+        axios.post('https://menufeture.herokuapp.com/isadmin',{_id:id})
         .then(res=>{
             setUdata(res.data);
             console.log(res.data);
         })
     },[])
+    if(!id){return <Navigate to="/profile" state={{ from: location }} replace></Navigate>;}
     if(loading || !udata){
         return "...Loading";
     }
-    if(!user){
+    if(!user ){
         return <Navigate to="/login" state={{ from: location }} replace></Navigate>
     }
     if(user.email===udata.email && udata.role==='admin'){

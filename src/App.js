@@ -21,6 +21,7 @@ import RequredAdmin from "./Components/Secure/RequredAdmin";
 import { ToastContainer} from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import Userorders from "./Components/Admin/Userorders";
+import Blogs from "./Components/Sections/Blogs/Blogs";
 
 function App() {
   const navigation = useNavigate();
@@ -37,11 +38,11 @@ function App() {
   })
   return (
     <div className="App text-white">
-      <div className=" grid grid-col-1 lg:grid-cols-12">
+      <div className="">
         <div className=" lg:col-start-1 lg:col-end-3 ">
           <Navbar />
         </div>
-        <div className="  bg-[#EDF0F6] lg:col-start-3 lg:col-end-13 ">
+        <div className="  bg-[#EDF0F6]  ">
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/dashboard" element={<Requreduser><RequredAdmin><Dashboard/></RequredAdmin></Requreduser>}>
@@ -58,6 +59,7 @@ function App() {
             <Route path="products/details/:id" element={<Requreduser><ProductDetail/></Requreduser>}/>
             <Route path="/profile" element={<Requreduser><Profile/></Requreduser>}/>
             <Route path="/profile/:id" element={<Profile/>}/>
+            <Route path="/blogs" element={<Blogs/>}/>
             <Route path="*" element={<Notfound/>}/>
           </Routes>
         </div>

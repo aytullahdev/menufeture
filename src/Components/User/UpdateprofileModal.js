@@ -14,7 +14,7 @@ const UpdateprofileModal = ({ userinfo,refetch }) => {
       const onSubmit = (data) => {
         // Handle user Login
        const updateData = {...userinfo,...data};
-       axios.post('http://localhost:5000/updateprofile',updateData)
+       axios.post('https://menufeture.herokuapp.com/updateprofile',updateData)
        .then(res=>{
            console.log(res.data);
            refetch();

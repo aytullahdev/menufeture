@@ -11,10 +11,10 @@ const Showadminoptions = ({ children }) => {
 
   useEffect(() => {
     console.log();
-   
-    if(id){
-        axios
-        .post("http://localhost:5000/isadmin", {
+
+    if (id) {
+      axios
+        .post("https://menufeture.herokuapp.com/isadmin", {
           _id: localStorage.getItem("adminid"),
         })
         .then((res) => {
@@ -23,21 +23,12 @@ const Showadminoptions = ({ children }) => {
         });
     }
   }, []);
-  if (!id || id === "") return;
-  if(loading) return;
-  if(!loading && udata){
-        if(udata.role==='admin'){
-            return children;
-        }else{
-            return;
-        }
-        
-  }else{
-    return;
+  
+  if (udata) {
+    if (udata.role === "admin") {
+      return children;
+    } 
   }
-      
-  
-  
 };
 
 export default Showadminoptions;

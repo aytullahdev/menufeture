@@ -8,7 +8,7 @@ import { useQuery } from "react-query";
 const Manageproducts = () => {
   const [products, setProducts] = useState([]);
   const { isLoading, error, data, refetch } = useQuery("repoData", () =>
-    axios.get("http://localhost:5000/products").then((res) => res.data)
+    axios.get("https://menufeture.herokuapp.com/products").then((res) => res.data)
   );
 
   const handelDelete = (id) => {
@@ -23,7 +23,7 @@ const Manageproducts = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post("http://localhost:5000/removeproduct", { _id: id })
+          .post("https://menufeture.herokuapp.com/removeproduct", { _id: id })
           .then((res) => {
             Swal.fire("Deleted!", "Your Product has been deleted.", "success");
             refetch();

@@ -15,14 +15,14 @@ const Editproduct = () => {
     formState: { errors },
   } = useForm();
   useEffect(() => {
-     axios.get(`http://localhost:5000/products/${id}`)
+     axios.get(`https://menufeture.herokuapp.com/products/${id}`)
      .then(res=>{
          setProduct(res.data);
      })
   }, [id])
   const onSubmit = (data) => {
     const sendData ={...product,...data};
-    axios.post("http://localhost:5000/addproduct", sendData).then((res) => {
+    axios.post("https://menufeture.herokuapp.com/addproduct", sendData).then((res) => {
        if(res.data?.modifiedCount===1){
          toast.success("Product Updated Sucessfully");
          navigate("/dashboard/products");

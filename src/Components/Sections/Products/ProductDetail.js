@@ -8,7 +8,7 @@ const ProductDetail = () => {
     const {id} = useParams()
     const [product, setProduct] = useState(null)
     useEffect(() => {
-        axios.get(`http://localhost:5000/products/${id}`)
+        axios.get(`https://menufeture.herokuapp.com/products/${id}`)
         .then((res)=>{
             setProduct(res.data);
         })

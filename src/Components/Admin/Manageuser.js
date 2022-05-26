@@ -5,10 +5,10 @@ import Managesingleuser from "./Managesingleuser";
 
 const Manageuser = () => {
   const { isLoading, error, data, refetch } = useQuery("repoUser", () =>
-    axios.get("http://localhost:5000/users").then((res) => res.data)
+    axios.get("https://menufeture.herokuapp.com/users").then((res) => res.data)
   );
   const handelMakeAdmin=(email)=>{
-     axios.post("http://localhost:5000/makeadmin",{email:email})
+     axios.post("https://menufeture.herokuapp.com/makeadmin",{email:email})
      .then(res=>{
        console.log(res.data);
        refetch();

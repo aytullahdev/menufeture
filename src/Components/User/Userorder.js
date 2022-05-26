@@ -13,7 +13,7 @@ const Userorder = ({ id, userInfo }) => {
   const [showReviewbox, setShowReviewbox] = useState(false);
   const [productId, setProductId] = useState(null);
   const { isLoading, error, data, refetch } = useQuery("repoData", () =>
-    axios.get(`http://localhost:5000/orders?id=${id}`).then((res) => res.data)
+    axios.get(`https://menufeture.herokuapp.com/orders?id=${id}`).then((res) => res.data)
   );
   const handlePayment = (payid, price) => {
     setprice(price);
@@ -32,7 +32,7 @@ const Userorder = ({ id, userInfo }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post("http://localhost:5000/delorder", { _id: id })
+          .post("https://menufeture.herokuapp.com/delorder", { _id: id })
           .then((res) => {
             Swal.fire("Deleted!", "Your Order has been deleted.", "success");
             refetch();

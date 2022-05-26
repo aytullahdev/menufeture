@@ -1,26 +1,106 @@
 import React from "react";
 import Navlink from "./Navlink";
 import Auth from "../../Firebase.init";
-import {signOut} from 'firebase/auth'
+import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Showadminoptions from "../../Secure/Showadminoptions";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 const Navbar = () => {
-  const [user,loading]= useAuthState(Auth)
+  const [user, loading] = useAuthState(Auth);
+  const [isAdmin, setisAdmin] = useState(false);
 
   return (
-    <div className="bg-green-400 hidden lg:sticky top-0 left-0 w-full lg:min-h-screen lg:flex lg:flex-col py-10">
-     
-       <Navlink to="/" text="Home"/>
-       <Navlink to="/products" text="Product"/>
-       <Navlink text="Blogs"/>
-       <Navlink text="About"/>
-      { !loading && <Showadminoptions> <Navlink to="/dashboard" text="Dashboard"/></Showadminoptions>}
-       {user && <Navlink to="/profile" text="Profile"/>}
-       {!user && <Navlink to="/login" text="Login"/>}
-       {user && <button className="btn mx-5" onClick={()=>{signOut(Auth);localStorage.clear('userid');localStorage.clear('adminid')}}>Signout</button>}
-     
-      
-      
+    <div>
+      <div class="navbar bg-base-100  text-black">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <label tabindex="0" class="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+            <ul
+              tabindex="0"
+              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/products">Products</Link>
+            </li>
+            <li>
+              <Link to="/blogs">Blog</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>{!user && <Link to="/login">Log in</Link>}</li>
+            </ul>
+          </div>
+          <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+        </div>
+        <div class="navbar-end hidden lg:flex">
+          <ul class="menu menu-horizontal p-0">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/products">Products</Link>
+            </li>
+            <li>
+              <Link to="/blogs">Blog</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>{!user && <Link to="/login">Log in</Link>}</li>
+          </ul>
+          
+        </div>
+        <div>
+        {user && (
+            <div class="navbar-end w-full">
+              <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                  <div class="w-10 rounded-full">
+                    <img src="https://api.lorem.space/image/face?hash=33791" />
+                  </div>
+                </label>
+                <ul
+                  tabindex="0"
+                  class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link to="/profile" class="justify-between">
+                      Profile
+                      <span class="badge">New</span>
+                    </Link>
+                  </li>
+                  <li>
+                    { isAdmin && <Link to="/Dashboard">Dashboard</Link>}
+                  </li>
+                  <li>
+                    <button onClick={()=>{signOut(Auth);localStorage.clear('userid');localStorage.clear('adminid')}}>Logout</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
+        </div>
+        
+      </div>
       
     </div>
   );

@@ -31,7 +31,7 @@ const Signup = () => {
       console.log(user);
       const userData = {email:user.user.email,name:'',education:'',location:'',phone:'',linkdin:''};
       console.log(userData);
-      axios.post('http://localhost:5000/user',userData)
+      axios.post('https://menufeture.herokuapp.com/user',userData)
       .then(res=>{
          signOut(Auth);
          navigation('/login');
