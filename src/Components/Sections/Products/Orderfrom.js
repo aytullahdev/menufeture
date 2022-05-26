@@ -7,6 +7,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Auth from "../../Firebase.init";
+import { toast } from "react-toastify";
 const stripePromise = loadStripe(
   "pk_test_51L2sXgF65j8JGYI7Esqw7JbRwzdYqdwhSDkR3Nc0pKE4ormrjsxeJSRWgZmflJmc8F8Iazdshcy0QaUEATogVfCd00tunE8JIm"
 );
@@ -28,6 +29,8 @@ const Orderfrom = ({ product }) => {
     .then(res=>{
        if(res?.data?.insertedId){
           setPaymentid(res.data.insertedId);
+          reset();
+          toast.success("Order is placed in profile");
           setShowcheckout(true)
        }
     })
@@ -108,11 +111,25 @@ const Orderfrom = ({ product }) => {
           </form>
         </div>
       )}
-      {showcheckout && (
-        <Elements stripe={stripePromise}>
-          <Checkout price={price} paymentid={paymentid}/>
-        </Elements>
-      )}
+      
+     
+      <div class={`modal ${showcheckout ? 'modal-open':'modal-close'}`}>
+        <div class="modal-box relative">
+          <label
+            
+            onClick={()=>{setShowcheckout(false)}}
+            class="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          {showcheckout && (
+          <div className="w-full ">
+            <Checkout price={price} paymentid={paymentid} />
+          </div>
+        )}
+        
+        </div>
+      </div>
     </div>
   );
 };

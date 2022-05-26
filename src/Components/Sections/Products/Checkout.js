@@ -4,7 +4,8 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { error } from "daisyui/src/colors";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const Checkout = ({price,paymentid}) => {
    const [carderror, setCarderror] = useState(null)
    let location = useLocation();
@@ -67,6 +68,7 @@ const Checkout = ({price,paymentid}) => {
           .then(res=>{
             if(res.data.matchedCount===1){
               toast.success("Payment Sucessfull");
+              //Swal.fire("Deleted!", "Your Order has been deleted.", "success");
               navigation('/profile')
               
             }else{
@@ -82,8 +84,8 @@ const Checkout = ({price,paymentid}) => {
   };
 
   return (
-    <div className="mx-auto w-2/3  rounded p-5">
-      <form className=" bg-white shadow-sm  p-5" onSubmit={handleSubmit}>
+    <div className="mx-auto  rounded p-5">
+      <form className=" bg-white   p-5" onSubmit={handleSubmit}>
         <CardElement
           options={{
             style: {
@@ -106,9 +108,12 @@ const Checkout = ({price,paymentid}) => {
           disabled={!stripe || !clientsecreat}
         >
           Pay
+         
         </button>
+        
         {carderror && <p className="text-sm text-red-400">{carderror}</p>}
       </form>
+     
       
     </div>
   );

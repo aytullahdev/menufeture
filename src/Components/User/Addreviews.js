@@ -25,7 +25,7 @@ const handelReview=()=>{
         if(res.data.insertedId){
             toast.success("Review Inserted Sucssfully");
             
-            setShowReviewbox(false);
+            
             return <Navigate to="/profile" />
            
             
@@ -36,7 +36,7 @@ const handelReview=()=>{
 
     <>
       {product && (
-        <div className="card my-10 bg-white shadow-lg py-4 text-black w-1/3 mx-auto">
+        <div className="card my-10 bg-white  py-4 text-black  mx-auto">
           <h1>Your Review for product -{product.name}</h1>
           <div className="flex items-center flex-col space-x-3">
             <div className="avatar">

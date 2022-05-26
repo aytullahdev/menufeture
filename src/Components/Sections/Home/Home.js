@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Footer from "../Footer/Footer";
+import Reviews from "../Main/Reviews";
 import Products from "../Products/Products";
 
 const Home = () => {
   return (
     <div>
-      <div className="text-white uppercase my-4 bg-gradient-to-r from-green-500 to-green-400  cursor-pointer rounded-lg  text-left px-4 shadow mx-10 pt-10 pb-2">
-        <h1 className="text-3xl lg:text-6xl ">Welcome to our site</h1>
-        <p className="py-3 px-2  text-sm lg:text-lg   font-semibold capitalize">
+      <div className="text-white uppercase my-4 bg-gradient-to-r from-green-500 to-green-400  cursor-pointer  text-left px-4 shadow  pt-10 pb-2">
+        <h1 className="text-3xl lg:text-5xl font-semibold italic ">We are top manufacturer for IOT Device </h1>
+        <p className="py-3 px-2  text-sm lg:text-lg   font-semibold uppercase">
           We Provide Authentic IOT Parts and Microcontroller
         </p>
         <button className="px-10 py-5  bg-green-600 hover:bg-green-500 rounded-xl mx-auto block my-5">
@@ -45,6 +47,7 @@ const Home = () => {
         </div>
       </div>
       <Products limit="6" />
+      <Reviews/>
       <div className="bg-white text-black py-2">
         <h1 className="text-3xl text-center uppercase">News</h1>
         <p className="py-2 text-lg lg:text-xl my-4 lg:font-semibold">
@@ -61,6 +64,7 @@ const Home = () => {
                 alt=""
               />
             </div>
+           
             <div className="py-2">
               <h1 className="font-bold text-2xl">Raspberry Pi Store</h1>
               <p className="text-xl text-left py-2">
@@ -104,6 +108,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

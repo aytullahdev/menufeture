@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-const Singleorder = ({handelDelete,data,handlePayment,handleReview}) => {
+const Singleorder = ({handelDelete,data,handlePayment,handleReview,showReviewbox}) => {
     const [product, setProduct] = useState(null);
     const [hasreview,setHasreview] = useState(false);
     useEffect(()=>{
@@ -18,7 +18,8 @@ const Singleorder = ({handelDelete,data,handlePayment,handleReview}) => {
             setHasreview(true);
           }
       })
-  },[])
+  },[showReviewbox])
+ 
 
     return (
         <>
@@ -44,21 +45,23 @@ const Singleorder = ({handelDelete,data,handlePayment,handleReview}) => {
         <td>{data.total}</td>
         <td>{data.payment?"Paid":"Unpaid"}</td>
         <th className=" space-x-2">
-        <button
+        <label
+            for="user-payment"
             onClick={()=>handlePayment(data._id,data.total)}
             disabled={data.payment}
             className="btn btn-primary text-white btn-xs ml-2"
           >
             Pay
-          </button>
-          <button
-
+          </label>
+         
+          <label
+            for="user-payment"
             onClick={()=>handleReview(data._id,product._id)}
             disabled={!data.payment || hasreview}
             className="btn btn-sucess text-white btn-xs ml-2"
           >
             Add Review
-          </button>
+          </label>
           <button className="btn btn-xs btn-warning text-white hover:bg-yellow-600" disabled={data.payment} onClick={()=>handelDelete(data._id)}>Delete</button>
         </th>
       </tr>
