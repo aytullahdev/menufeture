@@ -54,7 +54,7 @@ const Profile = () => {
               </p>
               <p>
                 Linkdin:
-                <span className="text-md px-5 "><a target="_blank" className=" link link-hover" href={data.linkdin}>linkdin profile</a></span>
+                <span className="text-md px-5 ">{data.linkdin==="" ?"No link":<a target="_blank" className=" link link-hover" href={data.linkdin}>linkdin profile</a>}</span>
               </p>
               {user && !loading  && user.email === data.email && (
                 <label

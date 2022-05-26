@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
+import Swal from "sweetalert2";
 import Managesingleuser from "./Managesingleuser";
 
 const Manageuser = () => {
@@ -8,11 +9,26 @@ const Manageuser = () => {
     axios.get("https://menufeture.herokuapp.com/users").then((res) => res.data)
   );
   const handelMakeAdmin=(email)=>{
-     axios.post("https://menufeture.herokuapp.com/makeadmin",{email:email})
-     .then(res=>{
-       console.log(res.data);
-       refetch();
-     })
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Make Admin",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post("https://menufeture.herokuapp.com/makeadmin",{email:email})
+        .then(res=>{
+          Swal.fire("Updated!", "User id updated.", "success");
+         
+          refetch();
+        })
+     
+      }
+    });
+    
   }
   
   return (
