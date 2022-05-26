@@ -57,7 +57,7 @@ const Navbar = () => {
             <li>{!user && <Link to="/login">Log in</Link>}</li>
             </ul>
           </div>
-          <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <a class="btn btn-ghost normal-case text-xl">Menufeture</a>
         </div>
         <div class="navbar-end hidden lg:flex">
           <ul class="menu menu-horizontal p-0">

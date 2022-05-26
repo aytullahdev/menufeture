@@ -5,6 +5,7 @@ import Auth from "../Firebase.init";
 import {signOut} from 'firebase/auth'
 import {useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth';
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [
@@ -22,7 +23,7 @@ const Signup = () => {
   const navigation = useNavigate();
   const onSubmit = (data) => {
     // Handel create user
-    if(data.password!==data.cpassword) return;
+    if(data.password!==data.cpassword){toast.warning("Password not match"); return;};
     createUserWithEmailAndPassword(data.email,data.password)
     
   };
@@ -64,7 +65,7 @@ const Signup = () => {
               <span class="label-text">Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="password"
               class="input input-bordered"
               {...register("password", { required: true })}
@@ -78,7 +79,7 @@ const Signup = () => {
               <span class="label-text">Confirm Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Confirm password"
               class="input input-bordered"
               {...register("cpassword", { required: true })}

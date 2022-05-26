@@ -66,7 +66,7 @@ const Login = () => {
               <span class="label-text">Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="password"
               {...register("password", { required: true })}
               class="input input-bordered"
