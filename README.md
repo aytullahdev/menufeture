@@ -1,5 +1,8 @@
 # Project Name
     Menufetture
+# Admin Cread
+    Email: admin@gmail.com
+    password: admin123
 ## Live site
     https://menufecture-a33d3.web.app/
 # Api link
